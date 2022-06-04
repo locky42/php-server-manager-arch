@@ -1,0 +1,34 @@
+#!/bin/bash
+function _status {
+  $1$2
+  sleep 1
+  STATUS_CHECK=$(systemctl status $2)
+  FIRST_SYMBOL=${STATUS_CHECK:0:1}
+
+  if [[ $FIRST_SYMBOL == "●" ]]
+    then
+      echo echo $2 " => enabled"
+    else
+      echo echo $2 " => disabled"
+      exit 1
+  fi
+}
+function stop {
+  $(_status "systemctl stop " "httpd.service")
+  $(_status "systemctl stop " "mysqld.service")
+}
+function start {
+  $(_status "systemctl start " "mysqld.service")
+  $(_status "systemctl start " "httpd.service")
+}
+if [ $1 == "start" ]
+  then
+    start
+elif [ $1 == "restart" ]
+  then
+    stop
+    start
+elif [ $1 == "stop" ]
+  then
+    stop
+fi
