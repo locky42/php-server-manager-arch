@@ -7,7 +7,7 @@ cp ./example.com.conf /etc/httpd/conf/extra/sites/example.com.conf
 cp ./addhost /usr/bin/addhost
 cp ./server /usr/bin/server
 cp ./phpswitch /usr/bin/phpswitch
-cp -R ./versions /etc/httpd/conf/extra/psm/versions
+cp -R ./versions /etc/httpd/conf/extra/psm
 cp -R ./psm ~/.config/psm
 
 chmod +x /usr/bin/addhost
